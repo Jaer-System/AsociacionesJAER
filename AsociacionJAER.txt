@@ -1,0 +1,141 @@
+
+/**
+ *Cuatrimestre : 		2019-1
+ *Grupo: 			ITIC-901-M
+ *Nombre del Equipo:		 System JAER
+ *Integrantes del equipo :	 González Morales Maria Anhel.
+ *			   	 Modesto Paredes Jennifer.
+ *		          	 Reyes González Raúl.
+ *			  	 Sánchez Solano Anthony Enrique. 
+**/
+//ARGUMENTOS
+ /** telefono 3456D 84329B luz 7932a agua estado-de-mexico 
+  * neza ixtapaluca benito-juarez rey-azul 57987 57000 Jacarandas adios 
+  * 78 169 L6D93 Casa 29E38 Departamento
+  * **/
+package contrato;
+
+    class Contrato {
+        String tipocontrato;
+        String codigopredio;
+        
+    Contrato(String tipocontrato, String codigopredio) {
+         this.codigopredio = codigopredio;
+         this.tipocontrato = tipocontrato;
+         }
+        
+    @Override
+  public String toString (){
+        String mensaje="\n "+tipocontrato+" \n "+codigopredio ;
+        return mensaje;
+    }
+    }
+    
+    class Predio{
+        String tipopredio;
+        String codigoinventario;
+        Contrato [] contratos;
+        Ubicacion [] ubicaciones;
+        Predio( String codigoinventario,String tipopredio) {
+            this.tipopredio = tipopredio;
+            this.codigoinventario = codigoinventario;
+        }
+    
+    @Override
+  public String toString (){
+        String mensaje=" "+tipopredio+" "+codigoinventario ;
+        return mensaje;
+    }
+        
+    }
+  class Ubicacion{
+    String estado;
+    String municipio;
+    String colonia;
+    String calle;
+    String codpostal;
+    String num;
+    Predio [] predios;
+    
+    Ubicacion(String estado,String municipio,String colonia,String calle,String codostal,String num){
+        this.estado=estado;
+        this.municipio=municipio;
+        this.colonia=colonia;
+        this.calle=calle;
+        this.codpostal=codpostal;
+        this.num=num;
+        
+    }
+  }
+
+ 
+
+public class Asociaciones {
+    
+    public static void main(String[] args) {
+        
+        
+        Predio pred1=new Predio(args[17],args[18]);
+        Predio pred2=new Predio(args[19],args[20]);
+        
+        Contrato  con1 = new Contrato(args[0],args[0]);
+        
+       con1.codigopredio = args[1];
+       con1.tipocontrato = args[3];
+       Contrato  con2 = new Contrato(args[1],args[2]);
+       con2.codigopredio = args[2];
+       con2.tipocontrato = args[5];
+       Contrato  con3 = new Contrato(args[0],args[0]);
+       con3.codigopredio = args[4];
+       con3.tipocontrato = args[0];
+
+    
+  
+        pred1.contratos = new Contrato[]{con1,con2};
+        pred2.contratos = new Contrato[]{con3};
+
+       Ubicacion ubi1 = new Ubicacion(args[0],args[0],args[0],args[0],args[0],args[0]);
+       ubi1.estado = args[6];
+       ubi1.municipio = args[7];
+       ubi1.colonia = args[9];
+       ubi1.calle = args[13];
+       ubi1.codpostal = args[12];
+       ubi1.num = args[16];
+       Ubicacion ubi2 = new Ubicacion(args[0],args[0],args[0],args[0],args[0],args[0]);
+       ubi2.estado = args[6];
+       ubi2.municipio = args[8];
+       ubi2.colonia = args[10];
+       ubi2.calle = args[14];
+       ubi2.codpostal = args[11];
+       ubi2.num = args[15];
+       ubi1.predios = new Predio[]{pred1};
+       ubi1.predios = new Predio[]{pred2};
+       Predio Predio = new Predio(args[0],args[0]);
+       Predio.contratos = new Contrato[]{con1,con2,con3};
+       Predio.ubicaciones = new Ubicacion[]{ubi1,ubi2};
+   
+                for(int i=0;i < Predio.contratos.length; i++){
+                  Contrato p = Predio.contratos[i];
+                  
+                 
+                    if("luz".equals(p.tipocontrato)){
+                        System.out.println("***********************************");
+                        Ubicacion u = Predio.ubicaciones[i];
+                        System.out.println("TIPO DE PREDIO: "+u.predios[i].tipopredio);
+                        System.out.println("CÓDIGO INVENTARIO:  "+ u.predios[i].codigoinventario);
+                        System.out.println("MUNICIPIO:  "+ u.municipio);
+                        System.out.println("CALLE:  "+u.calle);
+                        System.out.println("NÚMERO:  "+u.num);
+                        System.out.println("CÓDIGO POSTAL:  "+u.codpostal);
+                        
+                    }
+                }
+    
+       
+    
+      
+    }
+  
+
+}
+
