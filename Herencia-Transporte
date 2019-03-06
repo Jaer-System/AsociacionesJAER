@@ -1,0 +1,86 @@
+/ **
+ * Cuatrimestre: 2019-1
+ * Grupo: ITIC-901-M
+ * Nombre del Equipo: Sistema JAER
+ * Integrantes del equipo: González Morales Maria Anhel.
+ * Modesto Paredes Jennifer.
+ Reyes González Raúl.
+ * Sánchez Solano Anthony Enrique. 
+** /
+//ARGUMENTOS
+/*costo$120 tamaño:grande num:20 costo$130
+ tamaño:mediano num:50
+ Costo$210 Costo$220 Costo$230*/
+
+interface Transporte {
+ void costoBoleto();
+}
+class Aereo implements Transporte {
+String costoboleto;
+    Aereo(String costoboleto) {
+        this.costoboleto=costoboleto;
+           }
+ public void costoBoleto() {
+	System.out.println(costoboleto);
+    }
+}
+
+abstract class Terrestre implements Transporte {
+
+ abstract String numAsiento();
+    String costoboleto;
+    String tamano;
+    String numasien;
+    Terrestre(String costoboleto,String tamano,String numasien) {
+        this.costoboleto=costoboleto;
+        this.tamano=tamano;
+        this.numasien=numasien;}
+ String tamano() {
+     return tamano;
+     }
+}
+ class Autobus extends Terrestre {
+     String ivaagregado;
+     public Autobus(String costoboleto, String tamano, String numasien, String ivaagregado) {
+        super(costoboleto, tamano, numasien);
+        this.ivaagregado=ivaagregado;
+    }  
+     public void costoBoleto() {System.out.println(costoboleto+" "+ivaagregado);}
+     
+     String numAsiento() {
+     return numasien;
+     }
+   
+}
+class Tren extends Terrestre {
+    String numvagon;
+
+    public Tren(String costoboleto, String tamano, String numasien, String numvagon ) {
+        super(costoboleto, tamano, numasien);
+        this.numvagon=numvagon;
+    }
+    public void costoBoleto() {
+	System.out.println(costoboleto);}
+    
+    String numAsiento(){
+     return numasien+" "+numvagon;
+    }
+     
+}
+public class Polimo {
+    public static void main(String[]t1) {
+        final Tren trenn=new Tren(t1[0],t1[1],t1[2],t1[9]);
+        final Autobus auto = new  Autobus(t1[3],t1[4],t1[5],t1[10]);
+        final Transporte[] trans = new  Transporte[]{
+        new Aereo(t1[6]),trenn,auto, ()->System.out.println(t1[7]),
+        ()-> System.out.println(t1[8])};
+        for (final Transporte a: trans) {
+            a.costoBoleto();
+        }
+        final Terrestre[] t2 = new  Terrestre[]{auto, trenn};
+        for (final Terrestre t: t2) {
+            System.out.println(t.tamano()+" "+t.numAsiento());
+        }
+    }
+
+}
