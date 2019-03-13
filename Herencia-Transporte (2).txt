@@ -1,0 +1,71 @@
+/*180.90 Mediano 28 209.10 Grande 17 537.80 472 298.50 3 39 */
+
+interface Transporte {
+ void costoBoleto();
+}
+class Aereo implements Transporte {
+Double costoboleto;
+    Aereo(Double costoboleto) {
+        this.costoboleto=costoboleto;
+           }
+ public void costoBoleto() {System.out.println("Costo del boleto Aéreo= $"+costoboleto);}
+}
+abstract class Terrestre implements Transporte {
+
+ abstract String numAsiento();
+    Double costoboleto;
+    String tamano;
+    Integer numasien;
+    Terrestre(Double costoboleto,String tamano,Integer numasien) {
+        this.costoboleto=costoboleto;
+        this.tamano=tamano;
+        this.numasien=numasien;}
+ String tamano() {
+     return "Tamaño del transporte= "+tamano;
+     }
+}
+ class Autobus extends Terrestre {
+     Double ivaagregado;
+     public Autobus(Double costoboleto, String tamano, Integer numasien, Double ivaagregado) {
+        super(costoboleto, tamano, numasien);
+        this.ivaagregado=ivaagregado;
+    }  
+     public void costoBoleto() {System.out.println("Costo del boleto de Autobus= $"+costoboleto+"   Iva agregado=$ "+ivaagregado);}
+     
+     String numAsiento() {
+     return "Número de asiento del Autobus= "+numasien;
+     }
+   
+}
+class Tren extends Terrestre {
+    Integer numvagon;
+
+    public Tren(Double costoboleto, String tamano, Integer numasien, Integer numvagon ) {
+        super(costoboleto, tamano, numasien);
+        this.numvagon=numvagon;
+    }
+    public void costoBoleto() {System.out.println("Costo del Tren= $"+costoboleto);}
+    
+    String numAsiento(){
+     return "Número de asiento del tren= "+numasien+" Número  de vagon= "+numvagon;
+    }
+     
+}
+public class Polimo {
+    public static void main(String[]t1) {
+        final Tren trenn=new Tren(Double.parseDouble(t1[0]),t1[1],Integer.parseInt(t1[2]),Integer.parseInt(t1[9]));
+        final Autobus auto = new  Autobus(Double.parseDouble(t1[3]),t1[4],Integer.parseInt(t1[5]),Double.parseDouble(t1[10]));
+        final Transporte[] trans = new  Transporte[]{
+        new Aereo(Double.parseDouble(t1[6])),trenn,auto, ()->System.out.println("Costo de boleto  Aéreo= $"+t1[7]),
+        ()-> System.out.println("Costo de boleto  Aéreo= $"+t1[8])};
+        for (final Transporte a: trans) {
+            a.costoBoleto();
+        }
+        final Terrestre[] t2 = new  Terrestre[]{auto, trenn};
+        for (final Terrestre t: t2) {
+            System.out.println(t.numAsiento()+" "+ t.tamano());
+        }
+    }
+
+}
+
