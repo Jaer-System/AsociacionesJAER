@@ -1,0 +1,56 @@
+package ejerciciosingleton;
+/**
+ *Cuatrimestre : 		2019-1
+ *Grupo: 			ITIC-901-M
+ *Nombre del Equipo:		 System JAER
+ *Integrantes del equipo :	 González Morales Maria Anhel.
+ *			   	 Modesto Paredes Jennifer.
+ *		          	 Reyes González Raúl.
+ *			  	 Solano salazar Anthony Enrique. 
+**/
+
+//ARGUMENTOS
+
+
+/* Dell HP */ 
+
+class MonitorSingleton {
+    private static final MonitorSingleton nMonitor = new MonitorSingleton();
+    
+    private String marcaMonitor;
+    
+    private MonitorSingleton(){}
+
+    
+ public static MonitorSingleton getNmonitor(){
+    if (nMonitor == null) {}
+    return nMonitor;
+ }
+
+    public String getMarcaMonitor() {
+        return marcaMonitor;
+    }
+
+    public void setMarcaMonitor(String marcaMonitor) {
+        this.marcaMonitor = marcaMonitor;
+    }
+}
+
+
+public class EjercicioSingleton {
+    public static void main(String[] t1) {
+       MonitorSingleton monitor1 = MonitorSingleton.getNmonitor();
+       monitor1.setMarcaMonitor(t1[0]);
+       System.out.println("1.- "+monitor1.getMarcaMonitor());
+       
+       MonitorSingleton monitor2 = MonitorSingleton.getNmonitor();
+       System.out.println("2.- "+monitor2.getMarcaMonitor());
+        
+       MonitorSingleton monitor3 = MonitorSingleton.getNmonitor();
+       System.out.println("3.- "+monitor3.getMarcaMonitor());
+       monitor3.setMarcaMonitor(t1[1]);
+       
+        System.out.println("1.- Marca: "+monitor1.getMarcaMonitor());
+   
+    }
+}
