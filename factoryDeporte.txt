@@ -1,0 +1,105 @@
+
+package factorydeporte;
+/**
+ *Cuatrimestre : 		2019-1
+ *Grupo: 			ITIC-901-M
+ *Nombre del Equipo:		 System JAER
+ *Integrantes del equipo :	 González Morales Maria Anhel.
+ *			   	 Modesto Paredes Jennifer.
+ *		          	 Reyes González Raúl.
+ *			  	 Solano salazar Anthony Enrique. 
+**/
+/*
+BBVA 132Puntos RealMadrid  CR7 primero 38Goles 13 Lakers NBA JAMES 
+*/
+interface Deporte{
+    String anotacion();
+}
+
+interface Liga{
+    Deporte numEquipos();
+}
+
+class Baloncesto implements Deporte{
+    String anotaciones;
+    String nombre;
+
+    public Baloncesto(String anotaciones, String nombre) {
+        this.anotaciones = anotaciones;
+        this.nombre = nombre;
+    }
+    @Override
+    public String anotacion() {
+        return anotaciones;
+    }  
+}
+
+abstract class Futbol implements Deporte{
+    String nombre;
+    String anotaciones;
+    String numTitulos;
+    public Futbol(String nombre,String anotaciones, String numTitulos) {
+        this.anotaciones = anotaciones;
+        this.nombre = nombre;
+        this.numTitulos = numTitulos;
+    }
+    @Override
+    public String anotacion() {
+        return anotaciones;
+    }
+    String numTitulos(){
+    return numTitulos;
+    }
+}
+
+class LigaEspanol implements Liga{
+    String nombre;
+    String nameStar;
+    String ranking;
+    @Override
+    public Deporte numEquipos () {
+        return new Futbol(nameStar, nombre,ranking){};
+     }
+    public LigaEspanol(String nombre,String nameStar, String ranking) {
+        this.nameStar = nameStar;
+        this.nombre = nombre;
+        this.ranking = ranking;
+    }
+    
+    
+}
+
+class LigaNBA implements Liga{
+     String nombre;
+     String nameStar;
+    @Override
+    public Deporte numEquipos() {
+        return new Baloncesto(nameStar, nombre);
+    }
+    public LigaNBA(String nombre, String nameStar) {
+        this.nombre = nombre;
+        this.nameStar = nameStar;
+    }
+}
+
+public class FactoryDeporte {
+     public static void imprime(Liga ligax) {
+        final Deporte a = ligax.numEquipos();
+         System.out.println(" Anotación por temporada = "+a.anotacion());
+     }
+     
+     
+public static void main(String[]t) {
+            System.out.println("***********DEPORTE FUTBOL*************");
+        imprime(new LigaEspanol(t[5],t[6], t[7]));
+        final LigaEspanol spain = new LigaEspanol(t[2], t[3], t[4]);
+        System.out.println("nombre-liga: " + t[0]);
+        System.out.println( "Equipo:"+ spain.nombre+  " Jugador-Estrella:"+spain.nameStar
+                +" Status-ranking-Club:"+ spain.ranking);
+        System.out.println("*************DEPORTE BALONCESTO***************");
+        imprime(new LigaNBA(t[0],t[1]));
+        final LigaNBA nba = new LigaNBA(t[8], t[9]);
+        System.out.println("Nombre Liga: "+ t[8]+"  Jugador Estrella: "+ t[9]);
+}
+
+}
