@@ -1,0 +1,61 @@
+
+
+/** 001
+ */
+    interface ActivoFijo {
+    void prestamo();
+    void devolucion();
+   }
+
+class Mueble implements ActivoFijo {
+ @Override
+  public void prestamo() {
+     System.out.println("001");
+ }
+
+ @Override
+ public void devolucion() {
+   System.out.println("100");
+ }
+}
+
+class Hardware implements ActivoFijo {
+ private final String nInv;
+ private final Mueble activofijo;
+
+ Hardware(String nInv, Mueble activoFijo) {
+   this.nInv = nInv;
+   this.activofijo = activoFijo;
+ }
+
+ @Override
+ public void prestamo() {
+   if ("001".equals(nInv)) {
+     activofijo.prestamo();
+   } else {
+     throw new IllegalAccessError("Solo nInv 001 puede invocar prestamo");
+   }
+ }
+
+    public String getnInv() {
+        return nInv;
+    }
+    
+
+
+ @Override
+ public void devolucion() {
+   throw new IllegalAccessError(" 100 No puede invocar devolucion");
+ }
+}
+
+public class EjercicioProxy {
+ public static void main(String[] t1) {
+   final Mueble silla = new Mueble();
+   	silla.prestamo();
+   	silla.devolucion();
+   final Hardware tecladoProxy = new Hardware(t1[0], silla);
+   	tecladoProxy.prestamo();
+   	tecladoProxy.devolucion();
+ }
+}
